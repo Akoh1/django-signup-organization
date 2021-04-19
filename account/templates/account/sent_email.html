@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <!--Main layout-->
+  
+    <div class="container">
+         
+      <div class="row mx-auto">
+        <div class="col-md-12 mb-4 text-center wow fadeIn">
+            <h1>Your Activation email has been sent to your mail!</h1>
+            {% comment %} <p>Your email {{ user.email }}, pls {{ user.full_name }} activate your account </p>
+            <a href="{% url 'account:activate' user.slug %}" type="button" class="btn btn-success float-left">Activate</a> {% endcomment %}
+        </div>
+      </div>
+
+    </div>
+
+
+{% endblock %}

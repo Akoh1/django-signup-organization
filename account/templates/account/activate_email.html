@@ -1,0 +1,31 @@
+{% extends "base_email.html" %}
+
+{% block content %}
+  <!--Main layout-->
+  
+   {% comment %} <div class="container">
+         
+      <div class="row mx-auto">
+        <div class="col-md-12 mb-4 text-center wow fadeIn">
+            <h1>Activate</h1>
+            <p>Your email {{ user.email }}, pls {{ user.full_name }} activate your account </p>
+            <a href="{% url 'account:activate' user.slug %}" type="button" class="btn btn-success float-left">Activate</a>
+        </div>
+      </div>
+
+    </div>  {% endcomment %}
+     <div class="container">
+         
+      <div class="row mx-auto">
+        <div class="col-md-12 mb-4 text-center wow fadeIn">
+            <h1>Activate</h1>
+            <p>Your email {{ email }}, please activate your account </p>
+            <!-- <a href="https://my-project-management.herokuapp.com{{ url }}" type="button" class="btn btn-success float-left">Activate</a> -->
+            <a href="{{site_url}}{{ url }}" type="button" class="btn btn-success float-left">Activate</a>
+        </div>
+      </div>
+
+    </div>
+
+
+{% endblock %}

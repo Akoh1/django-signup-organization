@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <!--Main layout-->
+  
+    <div class="container">
+         
+      <div class="row mx-auto">
+        <div class="col-md-12 mb-4 text-center wow fadeIn">
+       
+            <div class="d-flex flex-row mb-3 justify-content-center">
+                <p>You have been invited with email {{ email }} to join this workplace {{ workplace }},
+                please signup to join</p>
+
+                <!-- Default form register -->
+            </div>
+
+            <div class="d-flex flex-row mb-3 justify-content-center">
+                <!-- Default form register -->
+                <form class="text-center border border-light p-5" method="POST" onsubmit="checkForm(this)">
+                    {% csrf_token %}
+                    <p class="h4 mb-4">Sign up</p>
+
+                    <div class="form-row mb-4">
+                        <div class="col">
+                            <!-- First name -->
+                            <input type="text" id="first_name" name="first_name" class="form-control" placeholder="First name">
+                        </div>
+                        <div class="col">
+                            <!-- Last name -->
+                            <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Last name">
+                        </div>
+                    </div>
+                    <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username"> 
+                    <!-- E-mail -->
+                    {% comment %} <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail"> {% endcomment %}
+
+                    <!-- Password -->
+                    <input type="password" id="defaultRegisterFormPassword" name="password1" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+                    {% comment %} <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                        At least 8 characters and 1 digit
+                    </small> {% endcomment %}
+
+                    <input type="password" id="defaultRegisterFormPassword1" name="password2" class="form-control" placeholder="Confirm Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+                     <small id="passerror" style="display: none;" class="form-text text-muted mb-4">
+                        Your password do not match
+                    </small> 
+
+                    <!-- Phone number -->
+                    {% comment %} <input type="text" id="defaultRegisterPhonePassword" class="form-control" placeholder="Phone number" aria-describedby="defaultRegisterFormPhoneHelpBlock">
+                    <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">
+                        Optional - for two step authentication
+                    </small> {% endcomment %}
+
+
+                    <!-- Sign up button -->
+                    <button class="btn btn-info my-4 btn-block" type="submit">Sign Up</button>
+
+
+                </form>
+                <!-- Default form register -->
+            </div>
+       
+        </div>
+      </div>
+
+    </div>
+
+  <!--Main layout-->
+
+<script type="text/javascript">
+var passerror = document.querySelector('#passerror');
+    function checkForm(form)
+    {
+    
+        if(form.password1.value == "" || form.password1.value != form.password2.value) {
+            passerror.style.display = "block";
+            passerror.style.color = 'red';
+            console.log("test")
+            form.password2.focus();
+            return false;
+        
+        } 
+        return true;
+    }
+</script>
+{% endblock %}

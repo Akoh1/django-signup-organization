@@ -1,0 +1,243 @@
+{% extends "project/index.html" %}
+
+{% block index_content %}
+  <!--Main layout-->
+
+<h2 class="text-center">User detail</h2>
+{% comment %} <div class="container">
+    <div class="row">
+        <div class="col-md-12 mb-4 text-center wow fadeIn"> {% endcomment %}
+          
+        {% comment %} </div>
+    </div>
+</div> {% endcomment %}
+<div class="row">
+    {% comment %} <div class="col">
+      
+    </div> {% endcomment %}
+
+</div>
+
+
+{% comment %} <div class="row mt-5">
+  <div class="col-12">
+  
+  </div>
+  
+</div> {% endcomment %}
+<!--Section: Contact v.2-->
+<section class="mb-4">
+
+    <!--Section heading-->
+    <h2 class="h1-responsive font-weight-bold text-center my-4">Contact us</h2>
+    <!--Section description-->
+    {% comment %} <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+        a matter of hours to help you.</p> {% endcomment %}
+
+    <div class="row">
+
+        <!--Grid column-->
+        <div class="col-md-9 mb-md-0 mb-5">
+            <form method="POST">
+            {% csrf_token %}
+                 {% if request.user == user %}
+                <!--Grid row-->
+                <div class="row">
+                   
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <span>First name</span>
+                            {% comment %} <span>{{ user.first_name }}</span> {% endcomment %}
+                            <input type="text" id="first_name_d" name="first_name" value="{{ user.first_name }}" class="form-control" readonly>
+                            {% comment %} <label for="first_name_d" class="">First name</label> {% endcomment %}
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <span>Last name</span>
+                            <input type="text" id="last_name_d" name="last_name" value={{ user.last_name }} class="form-control" readonly>
+                            {% comment %} <label for="last_name_d" class="">Last name</label> {% endcomment %}
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+
+                <!--Grid row-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form mb-0">
+                            <span>Username</span>
+                            <input type="text" id="username_d" name="username" value={{ user.username }} class="form-control" readonly>
+                            {% comment %} <label for="username_d" class="">username</label> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+                <!--Grid row-->
+                {% else %}
+                 <div class="row">
+                   
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <span>First name</span>
+                            <input type="text" id="first_name" name="first_name" value={{ user.first_name }} class="form-control" readonly>
+                            {% comment %} <label for="first_name" class="">First name</label> {% endcomment %}
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <span>Last name</span>
+                            <input type="text" id="last_name" name="last_name" value={{ user.last_name }} class="form-control" readonly>
+                            {% comment %} <label for="last_name" class="">Last name</label> {% endcomment %}
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+
+                <!--Grid row-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form mb-0">
+                            <span>Username</span>
+                            <input type="text" id="username" name="username" value={{ user.username }} class="form-control" readonly>
+                            {% comment %} <label for="username" class="">username</label> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if user.role == 'US' %}
+                    <p>Your role is <strong class="text-primary">User</strong></p>
+                {% elif user.role == 'PR' %}
+                    <p>Your role is <strong class="text-warning">Project Manager</strong></p>
+                {% elif request.user.is_admin %}
+                    <p>Your role is <strong class="text-danger">Administrator</strong></p>
+                {% elif user.role == 'QA' %}
+                    <p>Your role is <strong class="text-secondary">Quality Analyst</strong></p>
+                {% endif %}
+                <!--Grid row-->
+                {% if request.user.is_admin and request.user != user %}
+                <div class="row">
+
+                    <!--Grid column-->
+                    <div class="col-md-12">
+
+                        <div class="md-form">
+                            <select name="role" class="browser-default custom-select" readonly>
+                              <option value={{ user.role }} selected>Change user role</option>
+                              <option value="US">User</option>
+                              <option value="PR">Project Manager</option>
+                              <option value="QA">Quality Analyst</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+                {% endif %}
+                <!--Grid row-->
+
+            
+            <div class="row text-center text-md-left">
+                <div class="col-md-6">
+                    {% if request.user == user %}
+                    <a class="btn btn-primary" id="edituser">Edit</a>
+                    {% else %}
+                     <button type="submit" class="btn btn-primary" id="savedituser">Save</button>
+                     {% comment %} <button class="btn btn-primary" id="editnormaluser">Edit</button> {% endcomment %}
+                    {% endif %}
+                    <button type="submit" style="display: none;" class="btn btn-primary" id="saveditnormaluser">Save</button>
+                    {% comment %} <a style="display: none;" class="btn btn-primary" id="discard">Discard</a> {% endcomment %}
+                </div>
+                <div class="col-md-6">
+                    <button style="display: none;" class="btn btn-primary" id="discard">Discard</button>
+                </div>
+            </div>
+            </form>
+            {% comment %} <div class="text-center text-md-left">
+                <a class="btn btn-primary" id="edituser">Edit</a>
+                <a style="display: none;" class="btn btn-primary" id="saveedituser">Save</a>
+            </div> {% endcomment %}
+            <div class="status"></div>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        {% comment %} <div class="col-md-3 text-center">
+            <ul class="list-unstyled mb-0">
+                <li><i class="fas fa-map-marker-alt fa-2x"></i>
+                    <p>San Francisco, CA 94126, USA</p>
+                </li>
+
+                <li><i class="fas fa-phone mt-4 fa-2x"></i>
+                    <p>+ 01 234 567 89</p>
+                </li>
+
+                <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+                    <p>contact@mdbootstrap.com</p>
+                </li>
+            </ul>
+        </div> {% endcomment %}
+        <!--Grid column-->
+
+    </div>
+
+</section>
+<!--Section: Contact v.2-->
+
+<script type="text/javascript">
+    const edituser = document.querySelector('#edituser');
+    const editnormaluser = document.querySelector('#editnormaluser');
+    const savedituser = document.querySelector('#savedituser');
+    const saveditnormaluser = document.querySelector('#saveditnormaluser');
+    const discard = document.querySelector('#discard');
+
+    const first_name_d = document.querySelector('#first_name_d');
+    const last_name_d = document.querySelector('#last_name_d');
+    const username_d = document.querySelector('#username_d');
+
+    const first_name = document.querySelector('#first_name');
+    const last_name = document.querySelector('#last_name');
+    const username = document.querySelector('#username');
+
+    //if (edituser) {
+        edituser.addEventListener("click", function(){
+        saveditnormaluser.style.display = "block";
+        edituser.style.display = "none";
+        discard.style.display = "block";
+        
+        first_name_d.style.display = "block"
+        last_name_d.removeAttribute('readonly');
+        username_d.removeAttribute('readonly');
+        console.log("edit");
+    });
+    //} else if (editnormaluser) {
+    //   editnormaluser.addEventListener("click", function(){
+    //   savedituser.style.display = "block";
+    //    editnormaluser.style.display = "none";
+    //    discard.style.display = "block"; 
+    //    console.log("editnormal");
+    //});
+    //}
+    
+    
+    discard.addEventListener("click", function() {
+        location.reload(); 
+    });
+    {% comment %} userbtn.addEventListener("click", function() {
+        divworkplace.style.display = "none";
+        userplace.style.display = "block";
+        console.log("user");
+    }); {% endcomment %}
+</script>
+{% endblock %}

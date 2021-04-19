@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <!--Main layout-->
+  
+    <div class="container">
+         
+      <div class="row mx-auto">
+        <div class="col-md-12 mb-4 text-center wow fadeIn">
+        {% if userform.errors %}
+            {% for field in userform %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in userform.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+         {% if adminform.errors %}
+            {% for field in adminform %}
+                {% for error in field.errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% for error in adminform.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+     
+           <!-- Material form register -->
+        {% comment %} <div class="row"> {% endcomment %}
+            <!-- <div class="d-flex flex-row mb-3 justify-content-center">
+                <div  id="admin" style="width: 100px; height: 100px; margin: 0px 20px; background-color: rgba(0,0,255,0.1);">
+                    <span>Register as a Workplace</span>
+                </div>
+                <div id="user" style="width: 100px; height: 100px; margin: 0px 20px; background-color: rgba(0,0,255,0.1);">
+                    <span>Register as a Single User</span>
+                </div>
+            </div> -->
+        {% comment %} </div> {% endcomment %}
+            <div class="d-flex mb-3 justify-content-center">
+                <div id="divworkplace">
+                    <div class="card">
+                        <!-- Card body -->
+                        <div class="card-body">
+                            <h5>Workplace form </h6>
+                            <form method="POST">
+                                {% csrf_token %}
+                             <p class="h4 text-center py-4">Sign up and create a Workplace</p>
+                                {% for field in adminform %}
+                                    <div class="fieldWrapper">
+
+                                    <div class="form-group">
+                                    <label>{{ field.label_tag }}</label>
+                                    {{ field }}
+                                        {{ field.errors }}
+                                        </div>
+                                        {% if field.help_text %}
+                                        <p class="help">{{ field.help_text|safe }}</p>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                                <button type="submit">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+      </div>
+
+    </div>
+
+  <!--Main layout-->
+
+</script>
+
+{% endblock %}

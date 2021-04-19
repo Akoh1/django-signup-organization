@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <!--Main layout-->
+  
+    <div class="container">
+         
+      <div class="row mx-auto">
+        <div class="col-md-12 mb-4 text-center wow fadeIn">
+     
+        <h3>Invite Users </h3>
+        <form class="text-center border border-light p-5" method="POST">
+            {% csrf_token %}
+                          
+            <div class="form-row mb-4">
+                <div class="col">
+                                        <!-- First name -->
+                    <input type="text" id="emails" name="emails" class="form-control" placeholder="Separate emails by a space">
+                </div>
+               
+            </div>
+            <button type="submit">Send Invite</button>
+        </form>
+                     
+        </div>
+      </div>
+
+    </div>
+
+  <!--Main layout-->
+<script type="text/javascript">
+
+
+</script>
+
+{% endblock %}
